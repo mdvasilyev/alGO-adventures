@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 // Time:	O(2^n)
-// Space:	O(n)
+// Space:	O(n*2^n)
 func subsets(nums []int) [][]int {
 	if len(nums) == 1 {
 		return [][]int{{}, {nums[0]}}

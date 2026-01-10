@@ -5,24 +5,18 @@ import (
 )
 
 // Time:	O(n)
-// Space:	O(n)
+// Space:	O(1)
 func maxProfit(prices []int) int {
 	if len(prices) < 2 {
 		return 0
 	}
-	maximum := 0
-	initialAmount := prices[0]
-	for _, price := range prices {
-		if price < initialAmount {
-			initialAmount = price
-		} else {
-			profit := price - initialAmount
-			if profit > maximum {
-				maximum = profit
-			}
-		}
+	initial := prices[0]
+	best := 0
+	for i := range prices {
+		initial = min(initial, prices[i])
+		best = max(best, prices[i]-initial)
 	}
-	return maximum
+	return best
 }
 
 func main() {

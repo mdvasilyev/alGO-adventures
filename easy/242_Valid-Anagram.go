@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"maps"
+)
 
 // Time:	O(len(s))
 // Space:	O(len(s))
@@ -8,20 +11,13 @@ func isAnagram(s string, t string) bool {
 	if len(s) != len(t) {
 		return false
 	}
-	m1 := make(map[rune]int)
-	m2 := make(map[rune]int)
-	for _, val := range s {
-		m1[val]++
+	sMap := make(map[byte]int)
+	tMap := make(map[byte]int)
+	for i := range s {
+		sMap[s[i]]++
+		tMap[t[i]]++
 	}
-	for _, val := range t {
-		m2[val]++
-	}
-	for key := range m1 {
-		if m1[key] != m2[key] {
-			return false
-		}
-	}
-	return true
+	return maps.Equal(sMap, tMap)
 }
 
 func main() {
